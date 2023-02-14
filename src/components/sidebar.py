@@ -5,7 +5,7 @@ sidebar_header = dbc.Row(
     [
         dbc.Col(
             [
-                html.H2("CNT Explorer", className="display-7"),
+                html.H2("CNT Production", className="display-7"),
             ]
         ),
         dbc.Col(

@@ -1,6 +1,6 @@
 from dash import Dash, page_container
 import dash_bootstrap_components as dbc
-from components import navbar
+from components import navbar, footer
 
 meta = {"name": "viewport", "content": "width=device-width, initial-scale=1"}
 
@@ -11,7 +11,9 @@ app = Dash(
     meta_tags=[meta],
 )
 
-app.layout = dbc.Container([navbar, page_container], id="page-container", fluid=True)
+app.layout = dbc.Container(
+    [navbar, page_container, footer], id="page-container", fluid=True
+)
 
 server = app.server
 

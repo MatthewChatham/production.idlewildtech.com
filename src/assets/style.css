@@ -161,9 +161,9 @@
   }
 
   /* move the sidebar toggle up to the top left corner */
-  /* #sidebar.collapsed #sidebar-toggle {
-    top: -2rem;
-  } */
+  #sidebar.collapsed #sidebar-toggle {
+    top: -1rem;
+  }
 
   /* also adjust margin of page content */
   #sidebar.collapsed~#page-content {

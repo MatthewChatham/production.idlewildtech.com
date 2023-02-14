@@ -3,10 +3,11 @@ from dash import html, Input, Output, State
 import dash_bootstrap_components as dbc
 
 from components.sidebar import sidebar
+from .scatterplot import scatter
 
 dash.register_page(__name__, path="/", title='CNT Production')
 
-content = html.Div(id="page-content", children=["Under construction"])
+content = html.Div(id="page-content", children=[scatter])
 
 
 def serve_layout():
