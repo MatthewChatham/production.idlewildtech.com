@@ -1,8 +1,9 @@
-from dash import Dash, page_container
 import dash_bootstrap_components as dbc
+from dash import Dash, page_container
+
 from components import navbar, footer
 
-meta = {"name": "viewport", "content": "width=device-width, initial-scale=1"}
+meta = {'name': "viewport", 'content': "width=device-width, initial-scale=1"}
 
 app = Dash(
     __name__,

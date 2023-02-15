@@ -1,13 +1,14 @@
 import dash
-from dash import html, Input, Output, State
 import dash_bootstrap_components as dbc
-
 from components.sidebar import sidebar
+from dash import html, Input, Output, State
+
 from .scatterplot import scatter
+from .scatter_table import  scatter_table
 
 dash.register_page(__name__, path="/", title='CNT Production')
 
-content = html.Div(id="page-content", children=[scatter])
+content = html.Div(id="page-content", children=[scatter, scatter_table])
 
 
 def serve_layout():

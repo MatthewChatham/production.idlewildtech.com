@@ -4,6 +4,7 @@
 .conda
 .vscode
 ipynb/
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -127,7 +128,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+src/.env
 .venv
 env/
 venv/
