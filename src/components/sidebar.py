@@ -49,10 +49,9 @@ sidebar = html.Div(
         dbc.Collapse(
             children=[
                 html.Hr(),
-                html.P('test'),
                 html.A(
                     "GitHub repository",
-                    href="",
+                    href="https://github.com/MatthewChatham/production.idlewildtech.com",
                 ),
             ],
             id="collapse",

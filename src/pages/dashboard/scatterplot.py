@@ -7,12 +7,14 @@ from utils import get_df
 dropdown_options = ['Sample Duration (min)', 'Number of Run Days on Tube', 'Lab Humidity (%)', 'Lab Temp (C)',
                     'Local DewPoint (F) ', 'Reactor Temp (C)', 'ferrocene (g)', 'water (g)', 'fuel (mL/h)', 'Ar (SLPM)',
                     'CO2 (SLPM)', 'H2 (SLPM)']
+df = get_df()
+dropdown_options += [c for c in df.columns if c not in dropdown_options]
 
 scatter = html.Div([
 
     html.B("Average RBM Position vs Selected Variable"), dbc.Row([
 
-        dbc.Col(dcc.Dropdown(dropdown_options, 'Sample Duration (min)', multi=False, placeholder='Pick X-axis',
+        dbc.Col(dcc.Dropdown(dropdown_options, 'Sample Duration (min)', multi=False, clearable=False, placeholder='Pick X-axis',
                              id='scatter-xaxis-dropdown'), md=3, sm=6), dbc.Col(
             dcc.Checklist(['Log Y', 'Squash'], ['Log Y'], id='scatter-opts', inline=True,
                           inputStyle={'margin-right': '5px'}, labelStyle={'margin-right': '10px'}), md=6, sm=7,

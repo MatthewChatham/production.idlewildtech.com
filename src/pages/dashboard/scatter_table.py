@@ -4,7 +4,12 @@ from utils import get_df
 import scipy.stats as stats
 import pandas as pd
 
-scatter_table = html.Div(id='scatter-table')
+table_title = html.Em('Correlation Tables Selected Variable vs Average RBM Position')
+
+scatter_table = html.Div(id='scatter-table-div', children=[
+    table_title,
+    html.Div(id='scatter-table')
+])
 
 @dash.callback(
     Output('scatter-table', 'children'),
