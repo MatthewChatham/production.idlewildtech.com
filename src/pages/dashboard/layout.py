@@ -5,10 +5,11 @@ from dash import html, Input, Output, State
 
 from .scatterplot import scatter
 from .scatter_table import  scatter_table
+from .actual_by_predicted_plot import actual_by_predicted
 
 dash.register_page(__name__, path="/", title='CNT Production')
 
-content = html.Div(id="page-content", children=[scatter, scatter_table])
+content = html.Div(id="page-content", children=[scatter, scatter_table, actual_by_predicted])
 
 
 def serve_layout():

@@ -10,6 +10,14 @@
   margin-top: 10px;
 }
 
+#avp-table-div {
+  margin-top: 10px;
+}
+
+#actual-vs-predicted-div {
+  margin-top: 10px;
+}
+
 /* add the three horizontal bars icon for the toggle */
 .navbar-toggler-icon {
   /*   background-image: url("data:image/svg+xml,"); */
