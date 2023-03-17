@@ -23,4 +23,37 @@ def get_df():
     return read_from_s3('production.idlewildtech.com', 'data/df_latest.csv')
         
 def get_dd():
-    return read_from_s3('production.idlewildtech.com', 'data/dd.csv')
+    return read_from_s3('production.idlewildtech.com', 'data/dd.csv').set_index('colname').to_dict()['coltype']
+
+
+def get_filter_mask(
+        df,
+        dd,
+        ctrl_values,
+        ctrl_idx,
+        null_values,
+        apply_filters
+):
+
+    ctrl_cols = [i['column'] for i in ctrl_idx]
+    print('ctrl_cols:')
+    print(ctrl_cols)
+
+    mask = [True]*len(df)
+
+    if not ctrl_values or not apply_filters:
+        return mask
+
+    for i, c in enumerate(ctrl_cols):
+        if dd[c] == 'numeric':
+            m = df[c].between(*ctrl_values[i])
+            if null_values[i]:
+                m = m | df[c].isnull()
+        else:
+            m = df[c].isin(ctrl_values[i])
+            if null_values[i]:
+                m = m | df[c].isnull()
+
+        mask = mask & m
+
+    return mask

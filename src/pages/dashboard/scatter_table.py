@@ -1,6 +1,6 @@
-from dash import dash_table, html, Output, Input
+from dash import dash_table, html, Output, Input, ALL
 import dash
-from utils import get_df
+from utils import get_df, get_dd, get_filter_mask
 import scipy.stats as stats
 import pandas as pd
 
@@ -14,11 +14,33 @@ scatter_table = html.Div(id='scatter-table-div', children=[
 @dash.callback(
     Output('scatter-table', 'children'),
     Input('scatter-xaxis-dropdown', 'value'),
-    Input('scatter-opts', 'value')
+    Input('scatter-opts', 'value'),
+    Input('filters-switch', 'on'),
+    Input({'type': 'filter-control', 'column': ALL}, 'value'),
+    Input({'type': 'filter-control', 'column': ALL}, 'id'),
+    Input({'type': 'filter-null', 'column': ALL}, 'value')
 )
-def update_scatter_table(x, opts):
+def update_scatter_table(
+    x,
+    opts,
+    apply_filters,
+    ctrl_values,
+    ctrl_idx,
+    null_values
+):
 
     df = get_df()
+    dd = get_dd()
+
+    filter_mask = get_filter_mask(
+        df, dd,
+        ctrl_values,
+        ctrl_idx,
+        null_values,
+        apply_filters
+    )
+
+    df = df[filter_mask]
 
     y_cols = [c for c in df.columns if c.endswith("Selected Average RBM Position")]
     df_melt = df.melt(id_vars=[c for c in df.columns if c not in y_cols])
