@@ -61,13 +61,15 @@ def update_scatter(
 
     y_cols = [c for c in df.columns if c.endswith("Selected Average RBM Position")]
     df_melt = df.melt(id_vars=[c for c in df.columns if c not in y_cols])
+    df_melt['Wavelength (nm)'] = df_melt['variable'].map(lambda s: s[:3])
 
     return dcc.Graph(
         figure=px.scatter(
             data_frame=df_melt,
             x=x,
             y="value",
-            color="variable" if 'Squash' not in opts else None,
-            log_y='Log Y' in opts
+            color="Wavelength (nm)" if 'Squash' not in opts else None,
+            log_y='Log Y' in opts,
+            labels={'value': 'Average RBM Position'}
         )
     )

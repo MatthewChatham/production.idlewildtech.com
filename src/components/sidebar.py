@@ -74,7 +74,7 @@ filter_modal = html.Div(
             [
                 dbc.ModalHeader(
                     [
-                        dbc.ModalTitle("Additional Filters")
+                        dbc.ModalTitle("Filters")
                     ]
                 ),
                 html.Div(
@@ -102,7 +102,7 @@ filter_modal = html.Div(
 
 filters = html.Div([
     dbc.Row([
-        dbc.Col(html.H5("Additional Filters"), className='col-auto'),
+        dbc.Col(html.H5("Filters"), className='col-auto'),
         dbc.Col(daq.BooleanSwitch(id='filters-switch', on=True), className='col-auto')
     ], className='g-1'),
     html.Div(

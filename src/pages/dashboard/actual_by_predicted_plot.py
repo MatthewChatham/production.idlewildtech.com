@@ -1,5 +1,6 @@
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 from dash import dcc, html, dash_table, Input, Output, ALL
 import dash
 import pandas as pd
@@ -49,6 +50,7 @@ def update_scatter(
     y_red = 0 + 1 * x_red
     fig.add_scatter(x=x_red, y=y_red)
     fig.add_hline(y=y.mean(), line_color="blue")
+    fig.update_layout(showlegend=False)
 
     return dcc.Graph(figure=fig)
 
@@ -65,31 +67,25 @@ def update_abp_table(
     ctrl_idx,
     null_values
 ):
-    df = get_df()
-    dd = get_dd()
-
-    filter_mask = get_filter_mask(
-        df, dd,
-        ctrl_values,
-        ctrl_idx,
-        null_values,
-        apply_filters
-    )
-
-    df = df[filter_mask]
-
-    df_melt = df.melt(id_vars=[c for c in df.columns if 'Selected Average RBM Position' not in c])
-    df_melt['Wavelength (nm)'] = df_melt['variable'].map(lambda s: s[:3]).astype(int)
-
-    kwargs = {k:df_melt[colnames[i]] for i,k in enumerate(argnames)}
-    preds = predict_polynomial(**kwargs)
-    y = df_melt['value']
-
-    fig = px.scatter(x=preds, y=y, color_discrete_sequence=['black'])
-    x_red = np.linspace(140, 270)
-    y_red = 0 + 1 * x_red
-    fig.add_scatter(x=x_red, y=y_red)
-    fig.add_hline(y=y.mean(), line_color="blue")
+    # df = get_df()
+    # dd = get_dd()
+    #
+    # filter_mask = get_filter_mask(
+    #     df, dd,
+    #     ctrl_values,
+    #     ctrl_idx,
+    #     null_values,
+    #     apply_filters
+    # )
+    #
+    # df = df[filter_mask]
+    #
+    # df_melt = df.melt(id_vars=[c for c in df.columns if 'Selected Average RBM Position' not in c])
+    # df_melt['Wavelength (nm)'] = df_melt['variable'].map(lambda s: s[:3]).astype(int)
+    #
+    # kwargs = {k:df_melt[colnames[i]] for i,k in enumerate(argnames)}
+    # preds = predict_polynomial(**kwargs)
+    # y = df_melt['value']
 
     table_title = html.Em('Model Metrics')
     table_df = pd.DataFrame({'Metric': ['RMSE', 'RSq', 'P-Value'], 'Value': [19.937, 0.63, '<.0001']})

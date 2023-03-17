@@ -56,8 +56,8 @@ def update_scatter_table(
                 df_melt.loc[(df_melt['variable'] == y) & mask, x],
                 df_melt.loc[(df_melt['variable'] == y) & mask, 'value'],
             )
-            table_df.loc[y, 'Correlation'] = r
-            table_df.loc[y, 'P-Value'] = p
+            table_df.loc[y, 'Correlation'] = round(r, 2)
+            table_df.loc[y, 'P-Value'] = round(p, 2)
 
         table_df = table_df.reset_index().rename({'index': 'Output Var'}, axis=1)
 

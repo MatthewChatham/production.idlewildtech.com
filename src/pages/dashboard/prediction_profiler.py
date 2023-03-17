@@ -30,8 +30,8 @@ sliders = [html.Span([colnames[i], sliders[i]]) for i,v in enumerate(argnames)]
 sliders += [dbc.Button('Reset', id='slider-reset')]
 
 profiler = dbc.Row([
-    dbc.Col(sliders, width=6),
-    dbc.Col(dcc.Graph(id='subplots'), width=6)
+    dbc.Col(sliders, md=6, sm=12),
+    dbc.Col(dcc.Graph(id='subplots'), md=6, sm=12)
 ])
 
 profiler = html.Div([
@@ -61,6 +61,7 @@ def update_profiler(*sliders):
         subplots.add_trace(g, row=row, col=col)
 
     subplots.update_yaxes(range=[130, 270])
+    subplots.update_annotations(font_size=12)
 
     return subplots
 
